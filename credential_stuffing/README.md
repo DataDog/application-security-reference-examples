@@ -9,7 +9,8 @@ The credentials used in credentials.txt are either common username/password comb
 1. Follow the ASM Referernce Examples README to ensure datadog is connected and the app is running.
 
 2. Run the Attack
-Ensure you are in the root pf the project directory. 
+   
+Ensure you are in the root of the project directory. 
 ```
 docker compose --file docker-compose.credential-stuffer.yaml up --build
 ```
