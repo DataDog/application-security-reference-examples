@@ -1,7 +1,7 @@
 # ASM Reference Examples
 The projects in this repo are meant to be easily run to see how Datadog signals different attacks. We aim to continue adding to this repository and the list below are the attacks that can be run today. 
 
-- [Credential Stuffing] (credential_stuffing/README.md)
+- [Credential Stuffing](credential_stuffing/README.md)
 
 ## Disclaimers
 This repository contains deliberately insecure web application. Do not deploy it in any production environment.
@@ -33,4 +33,4 @@ docker compose --file docker-compose.credential-stuffer.yaml up --build
 
 
 ## Datadog Resources
-1. https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/
+- https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/
