@@ -1,5 +1,5 @@
 flask
 Flask-SQLAlchemy
 flask-login
-ddtrace
+ddtrace==2.14.4
 mechanize

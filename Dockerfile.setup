@@ -1,0 +1,9 @@
+FROM python:3.11
+
+ADD setup.py /
+COPY requirements.txt /requirements.txt
+COPY setup_creds.csv /setup_creds.csv
+
+RUN pip3 install -r requirements.txt
+
+CMD ["python3", "setup.py"]

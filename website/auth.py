@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -15,14 +15,13 @@ auth = Blueprint('auth', __name__)
 def home():
     user = User.query.filter_by(username="username").first()
     if user:
-        return render_template("index.html")
+        return render_template("home.html")
     else:
         new_user = User(username="username", password=generate_password_hash("password"))
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user, remember=True)
-        return redirect(url_for('auth.home'))  
-    return render_template("index.html")
+        return render_template("login.html") 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -33,37 +32,32 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user:
             if check_password_hash(user.password, password):
-                print(username, password, "success!")
-                print(user.id)
                 login_user(user)
-                # This is needed for the datadog tracer to get the user id for credential stuffing attacks
-                # set_user(tracer, user.id, name=user.username, propagate=True)
+                # needed to track business logic with the datadog tracer
                 track_user_login_success_event(tracer, user.id)
-                print(user.get_id())
-                return redirect(url_for('views.home_page')), 200
+                return render_template("home.html"), 200
             else:
-                # set_user(tracer, user.id, name=user.username, propagate=True)
+                # needed to track business logic with the datadog tracer
                 exists = True
                 track_user_login_failure_event(tracer, user.id, exists)
                 print("wrong email or password")
                 flash('wrong email or password.', category='error')
                 return render_template("login.html"), 401
         else:
-            # set_user(tracer, None, username, propagate=True)
+            # needed to track business logic with the datadog tracer
             exists = False
-            track_user_login_failure_event(tracer, None, exists)
+            track_user_login_failure_event(tracer, str(username), exists)
             print("wrong email or password")
             flash('wrong email or password.', category='error')
             return render_template("login.html"), 401
     return render_template("login.html", user=current_user)
 
 
-
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('auth.login'))
+    return render_template("login.html")
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -71,7 +65,6 @@ def register():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        print(username,password)
         user = User.query.filter_by(username=username).first()
         
         if user:
@@ -81,7 +74,6 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash('Account created!', category='success')
-            return redirect(url_for('auth.home')), 200
+            return render_template("home.html"), 200
 
     return render_template("register.html", user=current_user)
