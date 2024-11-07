@@ -14,6 +14,7 @@ Ensure you are in the root of the project directory.
 ```
 docker compose --file docker-compose.credential-stuffer.yaml up --build
 ```
+When done testing, don't forget to stop the container. 
 
 ## Interpreting Results
 
