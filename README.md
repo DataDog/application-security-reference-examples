@@ -23,6 +23,7 @@ export DD_API_KEY="<api-key>"
 git clone https://github.com//DataDog/application-security-reference-examples
 ```
 4. Run an attack.
+   
 Credential Stuffer:
 ```
 docker compose --file docker-compose.credential-stuffer.yaml up --build
