@@ -2,6 +2,8 @@
 
 This application contians a login site that is vulnerable to credential stuffing. It will set up users, start logging in authorized users to establish a baseline of requests, and then launch a credential stuffing attack.
 
+For this attack, https://github.com/vanhauser-thc/thc-hydra is used.
+
 ## Disclaimers
 The credentials used in credentials.txt are either common username/password combos or completely made up. None of these credentials are from dataleaks.
 
