@@ -42,14 +42,14 @@ def login():
                 track_user_login_failure_event(tracer, user.id, exists)
                 print("wrong email or password")
                 flash('wrong email or password.', category='error')
-                return render_template("login.html"), 401
+                return render_template("login.html"), 400
         else:
             # needed to track business logic with the datadog tracer
             exists = False
             track_user_login_failure_event(tracer, str(username), exists)
             print("wrong email or password")
             flash('wrong email or password.', category='error')
-            return render_template("login.html"), 401
+            return render_template("login.html"), 400
     return render_template("login.html", user=current_user)
 
 
