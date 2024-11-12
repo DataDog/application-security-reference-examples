@@ -1,3 +1,2 @@
-instance/
-credential_stuffing/*.txt
 .DS_Store
+hidden/
