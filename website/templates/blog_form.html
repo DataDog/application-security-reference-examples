@@ -1,0 +1,42 @@
+{% extends "index.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+    <h1 align="center"> Add New Blog</h1>
+    <form method="POST">
+      <textarea name="blog" id="blog" class="form-control"></textarea>
+      <br />
+      <label for="pictureUrl">Optional: Link to a picture to add to your blog.</label><br>
+      <input type="url" id="pictureUrl" name="pictureUrl">
+      <button type="button" id="test-picture-url">Test My Photo URL</button><br><br>
+      <button type="submit" class="btn btn-primary">Add Blog Post</button>
+      </div>
+    </form>
+    <script>
+    document.getElementById('test-picture-url').addEventListener('click', function(event) {
+      event.preventDefault();
+      const url = document.getElementById('pictureUrl').value;
+      if (url) {
+        fetch('/test_picture_url', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ url: url }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert(data.success);
+          } else {
+            alert(data.error || 'An error occurred. Please try again.');
+          }
+        })
+        .catch(() => {
+          alert('Error testing URL, please try again and make sure this picture is public.');
+        });
+      } else {
+        alert('Please enter a valid public URL.');
+      }
+    });
+  </script>
+    
+    {% endblock %}
