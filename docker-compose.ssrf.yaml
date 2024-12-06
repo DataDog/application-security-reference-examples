@@ -1,0 +1,50 @@
+services:
+  agent:
+    image: datadog/agent:latest
+    ports:
+      - "8126:8126"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /var/run/datadog:/var/run/datadog
+    environment:
+      - DD_APM_ENABLED=true
+      - DD_IAST_ENABLED=true
+      - DD_APM_NON_LOCAL_TRAFFIC=true
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_SITE=${DD_SITE:-datadoghq.com}
+      - DD_ENV=credential-stuffing-reference-example
+      - DD_APPSEC_ENABLED=true 
+      - DD_APPSEC_SCA_ENABLED=true 
+    
+  vulnerable_website:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - DD_AGENT_HOST=agent
+      - DD_TRACE_AGENT_PORT=8126
+      - DD_TRACER_ENABLED=true
+      - DD_APPSEC_ENABLED=true
+      - DD_APPSEC_SCA_ENABLED=true 
+      - DD_IAST_ENABLED=true
+      - DD_SERVICE=${DD_SERVICE:-credential-stuffing-reference-example}
+      - DD_TRACE_DEBUG=true
+      - DD_LOGS_INJECTION=true
+    depends_on:
+      agent:
+        condition: service_healthy
+    healthcheck:
+        test: ["CMD", "curl", "http://vulnerable_website:5000"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+
+  ssrf_attack:
+    build:
+      context: .
+      dockerfile: ssrf/Dockerfile
+    depends_on:
+      vulnerable_website:
+        condition: service_healthy

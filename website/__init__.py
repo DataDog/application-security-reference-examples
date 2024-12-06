@@ -15,8 +15,12 @@ def create_app():
 
 
     from .auth import auth
+    from .blog import blog
 
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(blog, url_prefix='/')
+
+    
 
     from .models import User
     
