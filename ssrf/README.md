@@ -13,9 +13,10 @@ Ensure you are in the root of the project directory.
 ```
 docker compose --file docker-compose.ssrf.yaml up --build
 ```
-When done testing, don't forget to stop the container. 
+It should take a few minutes for the website to build and then run the attack. When done testing, don't forget to stop the container. 
 
 ## Interpreting Results
+You should be able to see the traces imediately, but it may take a few minutes for all the results to populate. 
 
 ### View the Vulnerability Explorer
 - https://app.datadoghq.com/security/appsec/vm

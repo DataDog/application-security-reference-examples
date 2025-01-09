@@ -14,11 +14,12 @@ The credentials used in credentials.txt are either common username/password comb
    
 Ensure you are in the root of the project directory. 
 ```
-docker compose --file docker-compose.credential-stuffer.yaml up --build
+docker compose --file docker-compose.credential-stuffing.yaml up --build
 ```
-When done testing, don't forget to stop the container. 
+It should take a few minutes for the website to build and then run the attack.When done testing, don't forget to stop the container. 
 
 ## Interpreting Results
+You should start seeing traces imediately but it may take around 10 minutes to see the signal mentioned below. 
 
 ### Inspect the traces: 
 - https://app.datadoghq.com/security/appsec/traces

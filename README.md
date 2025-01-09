@@ -13,21 +13,31 @@ This repository contains deliberately insecure web application. Do not deploy it
 ```
 export DD_API_KEY="<api-key>"
 ```
-2. Clone this repo
+
+2. (optional) If your Datadog site is not app.datadoghq.com (US1), export your correct site. If you are not sure what site you are on, check out the list [here](https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site). The following example is for US5.
+
+```
+export DD_SITE="us5.datadoghq.com" 
+```
+
+3. Clone this repo
 ```
 git clone https://github.com//DataDog/application-security-reference-examples
 ```
-3. Run an attack.
+4. Run an attack.
    
-Credential Stuffer:
 ```
-docker compose --file docker-compose.credential-stuffer.yaml up --build
+docker compose --file docker-compose.[attack].yaml up --build
 ```
-SSRF Attack:
-```
-docker compose --file docker-compose.ssrf.yaml up --build
-```
-4. Head to datadog, watch results populate in the Application Security tab. This may take a few minutes as things populate. More information on what to look for will be included in the README in the attack folder.
+When done testing, don't forget to stop the container. 
+
+| Attack | README | Command to run|
+| ------ | ------ | ------ |
+|Credential Stuffing | [README](credential_stuffing/README.md)| docker compose --file docker-compose.credential-stuffing.yaml up --build |
+|SSRF | [README](ssrf/README.md)| docker compose --file docker-compose.ssrf.yaml up --build |
+
+
+5. Head to datadog, watch results populate in the Application Security tab. This may take around 15 minutes as the website is spun up and results populate. More information on what to look for will be included in the README in the attack folder.
 
 
 

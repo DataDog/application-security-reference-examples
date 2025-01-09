@@ -42,7 +42,7 @@ base_url = "http://vulnerable_website:5000/test_picture_url"
 auth = HTTPBasicAuth(username, password)
 
 payload = {
-    "url": "bla.db.internal:6379:1324/?q=nice"  # fake malicious site
+    "url": "https://ifconfig.me"  # "malicious" payload
 }
 
 try:
