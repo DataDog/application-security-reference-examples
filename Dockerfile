@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM python:3.12.8
 
 ADD apps.py /
 COPY website /website
