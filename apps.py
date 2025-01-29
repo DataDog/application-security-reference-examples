@@ -1,6 +1,5 @@
 from flask import Flask
 from website import create_app
-import subprocess
 
 
 app = create_app()

@@ -7,6 +7,8 @@ The projects in this repo are meant to be easily run to see how Datadog signals 
 ## Disclaimers
 This repository contains deliberately insecure web application. Do not deploy it in any production environment.
 
+## Before Getting Started
+You will need a Datadog API key in order to run any of the scripts. If you do not have an account, head to [Datadog](https://www.datadoghq.com/) and click "Get Started Free" or "Free Trial." Create a new API key [here](https://app.datadoghq.com/organization-settings/api-keys).
 
 ### How To Run
 1. export your Datadog API key 

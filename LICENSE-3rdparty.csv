@@ -1,0 +1,10 @@
+Component,Origin,License,Copyright
+docker,PyPI,Apache-2.0,docker
+requests,PyPI,Apache-2.0,Kenneth Reitz
+hydra,https://github.com/vanhauser-thc/thc-hydra,AGPLv3,van Hauser
+mechanize,PyPI,BSD,Kovid Goyal 
+flask,PyPI,BSD,Pallets Projects
+Flask-SQLAlchemy,PyPI,BSD,Pallets Projects
+flask-login,PyPI,MIT, Matthew Frazier
+werkzeug,PyPI,BSD,Pallets Projects
+ddtrace,PyPI,BSD-3-Clause,Datadog Inc 
