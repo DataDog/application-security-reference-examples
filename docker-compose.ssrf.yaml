@@ -29,7 +29,7 @@ services:
       - DD_APPSEC_ENABLED=true
       - DD_APPSEC_SCA_ENABLED=true 
       - DD_IAST_ENABLED=true
-      - DD_SERVICE=${DD_SERVICE:-security-live}
+      - DD_SERVICE=${DD_SERVICE:-ssrf}
       - DD_TRACE_DEBUG=true
       - DD_LOGS_INJECTION=true
     depends_on:
