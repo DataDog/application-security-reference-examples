@@ -65,15 +65,4 @@ try:
 except requests.exceptions.RequestException as e:
     print("An error occurred:", e)
 
-payload = {
-    "url": "bla.db.internal:6379:1324/?q=nice"  # error
-}
-
-try:
-    response = requests.post(base_url, json=payload, auth = auth)
-    print("Status Code:", response.status_code)
-    print("Response:")
-    print(response.text)
-except requests.exceptions.RequestException as e:
-    print("An error occurred:", e)
 
